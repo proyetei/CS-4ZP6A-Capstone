@@ -1,4 +1,4 @@
-FROM banacorn/agda:latest
+FROM banacorn/agda:2.5.3
 
 RUN mkdir code
 

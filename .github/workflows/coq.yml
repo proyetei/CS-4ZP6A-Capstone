@@ -8,9 +8,13 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
-      - name: run docker image and compile coq file
+      - name: Build docker image
         run: |
-          docker run -d --name coq-container -v "./coq-code:/home/coq/code" coqorg/coq:latest
+          docker build -t "coq:latest" --file Dockerfile_coq .
+      - name: run docker image and compile file
+        run: |
+          docker run -d --name coq-container -v "./coq-code:/home/coq/code" coq:latest
           docker exec coq-container /bin/bash -c "coqc ./code/Basics.v"
           docker stop coq-container
           docker rm coq-container
+     

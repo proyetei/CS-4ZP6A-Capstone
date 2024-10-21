@@ -1,0 +1,3 @@
+FROM coqorg/coq:dev-native-ocaml-4.13-flambda
+
+ENTRYPOINT ["/bin/bash", "-c", "tail -f /dev/null"]

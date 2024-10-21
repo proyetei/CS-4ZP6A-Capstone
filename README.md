@@ -14,7 +14,7 @@ Improvements/todo:
 - different stages for docker build and file run (use docker account?)
 - build image and then run commands within new containers?
 - add version control to the containers using pipeline id?
-- make custom coq image
+- make custom coq and agda images
 
 
 
