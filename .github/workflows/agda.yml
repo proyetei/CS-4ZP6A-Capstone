@@ -1,0 +1,22 @@
+name: Agda Docker Practice
+
+on: [push]
+
+jobs:
+  agda_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Build docker image
+        run: |
+          docker build -t "agda-lib:latest" --file Dockerfile_agda .
+      - name: run docker image
+        run: |
+          docker run -d --name agda-container -v "./agda-code:/code" agda-lib:latest
+          docker exec agda-container /bin/bash -c "agda --compile /code/hello-world.agda"
+          docker stop agda-container
+          docker rm agda-container
+      - name: execute agda file
+        run: |
+          ./agda-code/hello-world
