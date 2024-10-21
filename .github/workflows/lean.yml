@@ -3,7 +3,7 @@ name: Lean Docker Practice
 on: [push]
 
 jobs:
-  agda_job:
+  lean_job:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
