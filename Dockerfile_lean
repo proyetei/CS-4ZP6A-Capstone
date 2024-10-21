@@ -1,0 +1,7 @@
+FROM ubuntu:latest
+
+RUN apt-get update 
+RUN apt-get install git curl wget -y
+RUN curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
+ENV PATH="${PATH}:/root/.elan/bin"
+ENTRYPOINT ["/bin/bash", "-c", "tail -f /dev/null"]

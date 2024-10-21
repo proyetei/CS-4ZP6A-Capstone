@@ -1,0 +1,22 @@
+name: Lean Docker Practice
+
+on: [push]
+
+jobs:
+  agda_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Build docker image
+        run: |
+          docker build -t "lean:latest" --file Dockerfile_lean .
+      - name: run docker image 
+        run: |
+          docker run -d --name lean-container -v "./lean-code:/code" lean:latest
+      - name: compile and run file
+        run: |
+          docker exec lean-container /bin/bash -c "lean /code/hello.lean"
+          docker exec lean-container /bin/bash -c "lean --run /code/hello.lean"
+          docker stop lean-container
+          docker rm lean-container
