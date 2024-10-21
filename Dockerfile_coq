@@ -1,3 +1,5 @@
 FROM coqorg/coq:dev-native-ocaml-4.13-flambda
 
+ENV PATH="${PATH}:/home/coq/.opam/4.13.1+flambda/bin/"
+
 ENTRYPOINT ["/bin/bash", "-c", "tail -f /dev/null"]
