@@ -1,0 +1,4 @@
+FROM homebrew/brew:master
+RUN brew install idris2
+
+ENTRYPOINT ["/bin/bash", "-c", "tail -f /dev/null"]

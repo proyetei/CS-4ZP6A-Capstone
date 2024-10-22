@@ -1,0 +1,20 @@
+name: Idris Docker Practice
+
+on: [push]
+
+jobs:
+  idris_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Build docker image
+        run: |
+          docker build -t "idris:latest" --file Dockerfile_idris .
+      - name: run docker image and compile idris file
+        run: |
+          docker run -d --name idris-container -v "./idris-code:/home/linuxbrew/code" idris:latest
+          docker exec idris-container /bin/bash -c "idris2 /home/linuxbrew/code/hello.idr -o hello"
+          docker exec idris-container /bin/bash -c "./build/exec/hello"
+          docker stop idris-container
+          docker rm idris-container
