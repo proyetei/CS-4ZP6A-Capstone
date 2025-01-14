@@ -13,6 +13,7 @@ data Definition = DefFun Name (Maybe Type) [Arg] Expr
 
 data Type = Con Name
         | Arr Type Type
+        | List Type
 
 data Arg = Arg { arg :: Name, ty :: Type }
 
@@ -25,6 +26,7 @@ data Expr = Var Name
         | Let [Definition] Expr
         | If Expr Expr Expr 
         | Where Expr [Definition]
+        | ListOf Expr
 
 -- aliases for readability purposes
 type Name = String
